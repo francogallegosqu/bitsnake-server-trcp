@@ -1,0 +1,89 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int       @id @default(autoincrement())
+  name      String    @unique
+  avatar    String?
+  email     String
+  password  String
+  sessions  Session[]
+  balances  Balance[]
+  deposits  Deposit[]
+  withdraws Witdraw[]
+  earns     Earn[]
+  fees      Fee[]
+  paylogs   PlayLog[]
+}
+
+model Session {
+  id      Int      @id @default(autoincrement())
+  created DateTime @default(now())
+  user    User?    @relation(fields: [userId], references: [id])
+  userId  Int?
+}
+
+model Balance {
+  id     Int    @id @default(autoincrement())
+  coin   String
+  amount Int    @default(0)
+  user   User?  @relation(fields: [userId], references: [id])
+  userId Int?
+}
+
+model Deposit {
+  id     Int      @id @default(autoincrement())
+  coin   String
+  amount Int      @default(0)
+  from   String
+  to     String
+  date   DateTime
+  user   User?    @relation(fields: [userId], references: [id])
+  userId Int?
+}
+
+model Witdraw {
+  id     Int      @id @default(autoincrement())
+  coin   String
+  amount Int      @default(0)
+  from   String
+  to     String
+  date   DateTime
+  user   User?    @relation(fields: [userId], references: [id])
+  userId Int?
+}
+
+model Earn {
+  id     Int      @id @default(autoincrement())
+  from   User?    @relation(fields: [userId], references: [id])
+  userId Int?
+  coin   String
+  amount Int      @default(0)
+  date   DateTime
+}
+
+model Fee {
+  id     Int      @id @default(autoincrement())
+  coin   String
+  amount Int      @default(0)
+  date   DateTime
+  user   User?    @relation(fields: [userId], references: [id])
+  userId Int?
+}
+
+model PlayLog {
+  id     Int    @id @default(autoincrement())
+  event  String
+  data   Json
+  user   User?  @relation(fields: [userId], references: [id])
+  userId Int?
+}

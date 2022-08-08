@@ -1,0 +1,36 @@
+version: '3.9'
+services:
+  typegraphql:
+    container_name: trpc-snake
+    restart: always
+    build: .
+    volumes:
+      - .:/usr/local/app
+      - /usr/local/app/node_modules
+    env_file:
+      - .env
+    ports:
+      - '3000:3000' ##trpc-snake
+      - '6555:5555' #prisma studio
+    depends_on:
+      postgres:
+        condition: service_healthy
+    command: npm run dev
+  postgres:
+    image: postgres:13
+    container_name: postgres
+    hostname: postgres
+    restart: always
+    ports:
+      - '5432:5432'
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: snake
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres -d snake" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    volumes:
+      - ./data/postgres:/var/lib/postgresql/data
