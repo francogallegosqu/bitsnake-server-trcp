@@ -10,7 +10,8 @@
     "prisma:migrate": "npx prisma migrate dev --name init",
     "prisma:generate": "npx prisma generate",
     "prisma:studio": "npx prisma studio",
-    "server": "ts-node-dev --poll --respawn --transpile-only src/server.ts"
+    "local": "ts-node-dev -r tsconfig-paths/register --poll --respawn --transpile-only --no-deps --exit-child src/server.ts",
+    "server": "ts-node-dev -r tsconfig-paths/register --poll --respawn --transpile-only --exit-child src/server.ts"
   },
   "author": "",
   "license": "ISC",
@@ -26,6 +27,7 @@
     "superjson": "^1.9.1",
     "ts-node": "^10.9.1",
     "ts-node-dev": "^2.0.0",
+    "typescript": "^4.7.4",
     "zod": "^3.17.10"
   },
   "devDependencies": {
@@ -33,6 +35,7 @@
     "@types/jsonwebtoken": "^8.5.8",
     "@types/node": "^18.6.3",
     "concurrently": "^7.2.2",
-    "prisma": "^4.1.1"
+    "prisma": "^4.1.1",
+    "tsconfig-paths": "^4.1.0"
   }
 }

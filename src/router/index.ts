@@ -1,10 +1,7 @@
 import { createRouter } from './createRouter'
-import { signIn } from '../UserController/SignIn'
-import { signUp } from '../UserController/SignUp'
-import signOut from '../UserController/SingOut'
-import allUsers from '../UserController/Users'
-export const appRouter = createRouter()
-    .merge('user.', signIn)
-    .merge('user.', signUp)
-    .merge('other.', signOut)
-    .merge('users.', allUsers)
+import { signUp, signIn, signOut } from '../resolvers/Mutations/index'
+import { all } from '../resolvers/Querys/index'
+export const appRouter = createRouter().merge('users.', all)
+// .merge('user.', signUp)
+// .merge('user.', signIn)
+// .merge('user.', signOut)

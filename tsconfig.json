@@ -5,9 +5,9 @@
     "lib": ["esnext", "esnext.asynciterable"],
     "esModuleInterop": true,
     "sourceMap": true,
-    "baseUrl": "./",
+    "baseUrl": ".",
     "paths": {
-      "src/*": ["./src/*"]
+      "@src/*": ["src/*"]
     }
-  }
+  },
 }
