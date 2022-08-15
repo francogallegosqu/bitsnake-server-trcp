@@ -14,7 +14,7 @@ model User {
   id        Int       @id @default(autoincrement())
   name      String    @unique
   avatar    String?
-  email     String
+  email     String    @unique
   password  String
   sessions  Session[]
   balances  Balance[]
@@ -72,12 +72,14 @@ model Earn {
 }
 
 model Fee {
-  id     Int      @id @default(autoincrement())
-  coin   String
-  amount Int      @default(0)
-  date   DateTime
-  user   User?    @relation(fields: [userId], references: [id])
-  userId Int?
+  id              Int      @id @default(autoincrement())
+  coin            String
+  amount          Int      @default(0)
+  date            DateTime
+  clientSessionId String
+  roomId          String
+  user            User?    @relation(fields: [userId], references: [id])
+  userId          Int?
 }
 
 model PlayLog {

@@ -89,6 +89,9 @@ CREATE TABLE "PlayLog" (
 -- CreateIndex
 CREATE UNIQUE INDEX "User_name_key" ON "User"("name");
 
+-- CreateIndex
+CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
+
 -- AddForeignKey
 ALTER TABLE "Session" ADD CONSTRAINT "Session_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 

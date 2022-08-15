@@ -4,13 +4,12 @@ import { inferAsyncReturnType } from '@trpc/server'
 import { CreateFastifyContextOptions } from '@trpc/server/adapters/fastify'
 import fastify from 'fastify'
 
-const app = fastify()
-// const prisma = new PrismaClient({
-//   log:
-//     process.env.NODE_ENV === 'development'
-//       ? ['query', 'error', 'warn']
-//       : ['error'],
-// })
+const prisma = new PrismaClient({
+  log:
+    process.env.NODE_ENV === 'development'
+      ? ['query', 'error', 'warn']
+      : ['error'],
+})
 
 export const createContext = async ({
   req,
@@ -19,8 +18,7 @@ export const createContext = async ({
   return {
     req,
     res,
-    // prisma,
-    register: app.register,
+    prisma,
   }
 }
 

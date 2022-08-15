@@ -10,7 +10,7 @@ services:
     env_file:
       - .env
     ports:
-      - '4000:4000' #trpc-snake
+      - '3000:3000' #trpc-snake
       - '9000:5555' #prisma studio
     depends_on:
       postgres:

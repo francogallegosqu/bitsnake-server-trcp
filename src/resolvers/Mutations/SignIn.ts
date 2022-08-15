@@ -10,14 +10,14 @@ const MAX_SESSIONS = 3
 const ONE_WEEK = 60 * 60 * 24 * 7
 
 const input = z.object({
-  name: z.string(),
+  email: z.string(),
   password: z.string(),
 })
 
 const resolve = async ({ input, ctx }: any) => {
   const user = await ctx.prisma.user.findUnique({
     where: {
-      name: input.name,
+      email: input.email,
     },
     include: {
       sessions: {
@@ -60,9 +60,9 @@ const resolve = async ({ input, ctx }: any) => {
   })
 
   const token = await JWT.tokenSign({
-    name: user.name,
+    email: user.email,
     sessionId: session.id,
-    hash: JWT.hash(user.name),
+    hash: JWT.hash(user.email),
   })
 
   // Clear output
