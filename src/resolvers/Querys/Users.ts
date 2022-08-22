@@ -8,8 +8,8 @@ export const all = createRouter().query('all', {
     // console.log('[result]', result)
     // 1,000,000,000
     // 1000000000000
-    const encrypted = encrypt("detallesdsdsdds")
+    const encrypted = encrypt('detallesdsdsdds')
     const decrypted = decrypt(encrypted)
     return true
-  },
+  }
 })
