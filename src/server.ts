@@ -9,14 +9,18 @@ server.register(fastifyTRPCPlugin, {
   prefix: '/trpc',
   trpcOptions: { router: appRouter, createContext },
 })
-  ; (async () => {
-    try {
-      await server.listen({ port: 3000 })
-      const URL = `http://localhost:${3000}/trpc`
 
-      console.log(`🚀 Server ready at ${URL}`)
-    } catch (err) {
-      server.log.error(err)
-      process.exit(1)
-    }
-  })()
+const main = async () => {
+  try {
+    await server.listen({ port: 3000, host: '0.0.0.0' })
+    const URL = `http://localhost:${3000}/trpc`
+
+    console.log(`🚀 Server ready at ${URL}`)
+  } catch (err) {
+    server.log.error(err)
+    process.exit(1)
+  }
+}
+
+
+main()

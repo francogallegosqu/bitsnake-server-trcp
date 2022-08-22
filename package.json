@@ -10,8 +10,7 @@
     "prisma:migrate": "npx prisma migrate dev --name init",
     "prisma:generate": "npx prisma generate",
     "prisma:studio": "npx prisma studio",
-    "local": "ts-node-dev -r tsconfig-paths/register --poll --respawn --transpile-only --no-deps --exit-child src/server.ts",
-    "server": "ts-node-dev -r tsconfig-paths/register --poll --respawn --transpile-only --exit-child src/server.ts"
+    "server": "ts-node-dev --poll --respawn --transpile-only src/server.ts"
   },
   "author": "",
   "license": "ISC",

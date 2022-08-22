@@ -3,10 +3,6 @@ import bcrypt from 'bcrypt'
 
 const APP_SECRET = 'TypeGraphQL'
 
-const options = {
-  algorithm: 'RS256',
-}
-
 export const getUserToken = async (ctx: any) => {
   const cookie = ctx.req.raw.rawHeaders.pop()
   if (cookie.search('token') != -1) {

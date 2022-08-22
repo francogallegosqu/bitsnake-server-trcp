@@ -4,7 +4,7 @@ import { z } from 'zod'
 // import cookie from "@fastify/cookie"
 import * as trpc from '@trpc/server'
 import * as cookie from 'cookie'
-import * as JWT from '@src/auth/jwt'
+import * as JWT from '../../auth/jwt'
 
 const MAX_SESSIONS = 3
 const ONE_WEEK = 60 * 60 * 24 * 7

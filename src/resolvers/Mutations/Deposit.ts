@@ -2,7 +2,7 @@
 import { createRouter } from '../../router/createRouter'
 import { z } from 'zod'
 import * as trpc from '@trpc/server'
-import * as JWT from '@src/auth/jwt'
+import * as JWT from '../../auth/jwt'
 import * as utils from '../../utils'
 const input = z.object({
     coin: z.string(),
