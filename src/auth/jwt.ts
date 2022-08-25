@@ -4,7 +4,8 @@ import bcrypt from 'bcrypt'
 const APP_SECRET = 'TypeGraphQL'
 
 export const getUserToken = async (ctx: any) => {
-  const cookie = ctx.req.raw.rawHeaders.pop()
+  const headers = ctx.req.raw.rawHeaders
+  const cookie = headers.find(element => element.includes('token') ? element : '')
   if (cookie.search('token') != -1) {
     const token = cookie.replace('token=', '')
     const result = jwt.verify(token, APP_SECRET)

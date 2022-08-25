@@ -6,7 +6,7 @@ import * as trpc from '@trpc/server'
 import * as cookie from 'cookie'
 import * as JWT from '../../auth/jwt'
 
-const MAX_SESSIONS = 3
+const MAX_SESSIONS = 2
 const ONE_WEEK = 60 * 60 * 24 * 7
 
 const input = z.object({
@@ -58,7 +58,6 @@ const resolve = async ({ input, ctx }: any) => {
       userId: user.id,
     },
   })
-
   const token = await JWT.tokenSign({
     email: user.email,
     sessionId: session.id,

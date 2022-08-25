@@ -2,7 +2,6 @@ import { PrismaClient } from '@prisma/client'
 import { inferAsyncReturnType } from '@trpc/server'
 // import * as trpcNext from '@trpc/server/adapters/next'
 import { CreateFastifyContextOptions } from '@trpc/server/adapters/fastify'
-import fastify from 'fastify'
 
 const prisma = new PrismaClient({
   log:

@@ -1,7 +1,7 @@
 import { createRouter } from '../../router/createRouter'
 import * as JWT from '../../auth/jwt'
 
-const resolve = async ctx => {
+const resolve = async ({ ctx }) => {
   const jwt = await JWT.getUserToken(ctx)
   const session = await ctx.prisma.session.delete({
     where: {
