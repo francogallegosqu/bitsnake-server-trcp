@@ -62,12 +62,18 @@ describe("bitsnake server", () => {
 
             const fields = response.headers['set-cookie'][0].split(';')
             const token = fields[0]
+            const user = response.body.result.data
+            const sessions = await prisma.session.findMany({
+                where: {
+                    userId: user.id
+                }
+            })
+
             const { body } = await request(url)
                 .get('/user.signOut')
                 .set('Cookie', token)
                 .expect(200)
-            // console.log('body', body.result)
-            // expect(body.result.data.id).to.be('number')
+            expect(body.result.data.id).to.equal(sessions[sessions.length - 1].id)
         })
         it("SignIn more than one time", async () => {
             const sessions = 5
