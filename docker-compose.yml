@@ -4,6 +4,7 @@ services:
     container_name: trpc-snake
     restart: always
     build: .
+    command: npm run test
     volumes:
       - .:/usr/local/app
       - /usr/local/app/node_modules
@@ -15,7 +16,6 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
-    command: npm run dev
   postgres:
     image: postgres:13
     container_name: postgres
