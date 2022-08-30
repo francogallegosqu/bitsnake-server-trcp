@@ -13,7 +13,7 @@ const resolve = async ({ input, ctx }: any) => {
   // Find user
   let user = await ctx.prisma.user.findUnique({
     where: {
-      name: input.name,
+      email: input.email,
     },
   })
 

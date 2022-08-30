@@ -25,11 +25,21 @@ const resolve = async ({ input, ctx }: any) => {
         'tradeType': 'WEB',
         'totalFee': '0.01',
         'currency': 'USDT',
-        'productType': 'fruit',
-        'productName': 'apple juice',
-        'productDetail': 'juicy apple juice'
+        'productType': 'Paquete 1',
+        'productName': 'Alimento',
+        'productDetail': 'Crecimiento X2'
     }
     const order = await utils.baseRequest(params).post('/binancepay/openapi/order', params)
+    // let user = await ctx.prisma.user.findUnique({
+    //     where: {
+    //         email: result['email'],
+    //     },
+    // })
+    // let deposit = input
+    // deposit.userId = user.id
+    // await ctx.prisma.deposit.create({
+    //     data: deposit
+    // })
     return order
 }
 

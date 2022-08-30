@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "pretest": "npm run prisma:migrate",
-    "test": "nodemon -L --watch test -e ts,js --exec 'mocha'",
+    "test": "nodemon -L --watch test -e ts,js --exec mocha",
     "predev": "npm run prisma:migrate",
     "dev": "concurrently -k -r  \"npm:prisma:studio\" \"npm:server\"",
     "prisma:migrate": "npx prisma migrate dev --name init",
