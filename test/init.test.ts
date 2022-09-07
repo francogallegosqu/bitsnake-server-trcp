@@ -100,17 +100,73 @@ describe('Start tests...', () => {
         expect(user.sessions.length).to.not.be.above(MAX_SESSIONS)
       }
     })
-    it('should do a deposit', async () => {
-      const input = {
-        coin: 'USDT',
-        amount: 2000,
-        from: 1223456789,
-        to: 23434343434,
-      }
-      const { body } = await request(url).post('/user.deposit').send(input).expect(200)
-      console.log(body)
-      // expect(body.result.data).to.equal(true)
-
+    it('shouldnt be permitted a user for doing deposit', async () => {
+      const token = 'token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImdhbGxlZ29zM0BnbWFpbC5jb20iLCJzZXNzaW9uSWQiOjc3NywiaGFzaCI6e30sImlhdCI6MTY2MTg3NDQ1N30.SztZHcqT4PZ5_xCLrvhAPAnggeA-5oUtVvUjA4MYJSY'
+      const res = await request(url).post('/user.deposit').set('Cookie', token)
+      const error = res.body.error
+      console.log('ssdsdsd', error)
+      // expect('not permitted!').to.equal(error.message)
     })
+    // it('should do a deposit', async () => {
+    //   const input = {
+    //     email: 'gallegos@gmail.com',
+    //     password: '1234'
+    //   }
+    //   const response = await request(url).post('/user.SignIn').send(input).expect(200)
+
+    //   const fields = response.headers['set-cookie'][0].split(';')
+    //   const token = fields[0]
+    //   const inputTwo = {
+    //     coin: 'USDT',
+    //     amount: '2000',
+    //     from: '1223456789',
+    //     to: '23434343434',
+    //   }
+    //   const payId = '484440389'
+    //   const { body } = await request(url).post('/user.deposit').send(inputTwo).set('Cookie', token).expect(500) //200
+    //   const data = body.result?.data
+    //   // expect(payId).to.equal(data.prepayId)
+
+    // })
+    // it('shouldnt do a deposit', async () => {
+    //   const input = {
+    //     coin: 'USDT',
+    //     amount: '2000',
+    //     from: '1223456789',
+    //     to: '23434343434',
+    //   }
+    //   const response = await request(url).post('/user.deposit').send(input)
+    //   // .expect(400)
+
+    //   const error = response.body.error
+    //   // expect('Order did not created!').to.equal(error.message)
+
+
+    // })
+    // it('should do a withdraw', async () => {
+    //   const input = {
+    //     coin: 'BUSD',
+    //     amount: 2000,
+    //     from: 1223456789,
+    //     to: 23434343434,
+    //     merchantTradeNo: 1246
+    //   }
+    //   const { body } = await request(url).post('/user.withdraw').send(input).expect(400) //200
+    //   // expect(body.result.data.amount).to.equal(input.amount)
+
+    // })
+    // it('should fail a withdraw', async () => {
+    //   const input = {
+    //     coin: 'BUSD',
+    //     amount: 2000,
+    //     from: 1223456789,
+    //     to: 23434343434,
+    //     merchantTradeNo: 1246
+    //   }
+    //   const response = await request(url).post('/user.withdraw').send(input).expect(400) //200
+    //   const error = response.body.error
+    //   // expect('Withdraw failed!').to.equal(error.message)
+
+    // })
   })
 })

@@ -23,16 +23,21 @@ export const baseRequest = (params) => {
   const nonce = hash()
   const toSign = timestamp + '\n' + nonce + '\n' + JSON.stringify(params) + '\n'
   const signature = hashSignature(toSign)
-  return axios.create({
-    baseURL,
-    headers: {
-      'content-type': 'application/json',
-      'BinancePay-Timestamp': timestamp,
-      'BinancePay-Nonce': nonce,
-      'BinancePay-Certificate-SN': apiKey,
-      'BinancePay-Signature': signature.toUpperCase()
-    }
-  })
+  try {
+    axios.create({
+      baseURL,
+      headers: {
+        'content-type': 'application/json',
+        'BinancePay-Timestamp': timestamp,
+        'BinancePay-Nonce': nonce,
+        'BinancePay-Certificate-SN': apiKey,
+        'BinancePay-Signature': signature.toUpperCase()
+      }
+    })
+
+  } catch (error) {
+    return null
+  }
 }
 
 export const encrypt = (secret) => {

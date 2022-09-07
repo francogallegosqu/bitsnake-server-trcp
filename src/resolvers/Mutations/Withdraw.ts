@@ -17,37 +17,42 @@ const resolve = async ({ input, ctx }: any) => {
         code: 'UNAUTHORIZED',
         message: 'not permitted!',
     })
-    console.log('[result]', result)
     const params = {
-        "requestId": "samplerequest1234",
-        "batchName": "sample batch test",
-        "currency": "BUSD",
-        "totalAmount": 200.4,
-        "totalNumber": 2,
+        "requestId": "samplebatcht1234",
+        "batchName": "Snake batch test",
+        "currency": input.coin,
+        "totalAmount": input.amount,
+        "totalNumber": 1,
         "bizScene": "SETTLEMENT",
 
         "transferDetailList": [
             {
                 "merchantSendId": "22231313131",
-                "transferAmount": 110.3,
+                "transferAmount": input.coin,
                 "receiveType": "PAY_ID",
                 "transferMethod": "SPOT_WALLET",
-                "receiver": "354205155",
+                "receiver": "354205155",//quien recibe
                 "remark": "test1"
             },
-
-            {
-                "merchantSendId": "21231313132",
-                "transferAmount": 90.1,
-                "receiveType": "PAY_ID",
-                "transferMethod": "SPOT_WALLET",
-                "receiver": "354205153",
-                "remark": "test2"
-            }
-
         ]
     }
     const order = await utils.baseRequest(params).post('/binancepay/openapi/payout/transfer', params)
+    if (!order.status) {
+        throw new trpc.TRPCError({
+            code: 'BAD_REQUEST',
+            message: 'Withdraw failed!',
+        })
+    }
+    let user = await ctx.prisma.user.findUnique({
+        where: {
+            email: result['email'],
+        },
+    })
+    let deposit = input
+    deposit.userId = user.id
+    await ctx.prisma.deposit.create({
+        data: deposit
+    })
     return order
 }
 
