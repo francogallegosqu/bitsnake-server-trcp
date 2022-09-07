@@ -9,10 +9,8 @@ export const getUserToken = (ctx) => {
   if (cookie.search('token') != -1) {
     const token = cookie.replace('token=', '')
     const result = jwt.verify(token, APP_SECRET)
-    console.log('result', result)
     return result
   }
-  console.log('fuera input')
   return {}
 }
 

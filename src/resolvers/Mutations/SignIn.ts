@@ -63,7 +63,6 @@ const resolve = async ({ input, ctx }: any) => {
     sessionId: session.id,
     hash: JWT.hash(user.email),
   })
-
   // Clear output
   user.password = ''
   ctx.res.header(

@@ -13,7 +13,7 @@ const input = z.object({
 const resolve = async ({ input, ctx }: any) => {
     // auth
     const result = JWT.getUserToken(ctx)
-    if (!result) throw new trpc.TRPCError({
+    if (result == null) throw new trpc.TRPCError({
         code: 'UNAUTHORIZED',
         message: 'not permitted!',
     })
