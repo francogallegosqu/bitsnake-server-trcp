@@ -1,0 +1,14 @@
+name: Bitsnake Server
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  init_server:
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Echo the message
+        run: |
+          echo "initializing  bitsnake server"
