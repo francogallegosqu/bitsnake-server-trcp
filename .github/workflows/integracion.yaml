@@ -12,3 +12,4 @@ jobs:
       - name: Echo the message
         run: |
           echo "initializing  bitsnake server"
+      - name: fecha
