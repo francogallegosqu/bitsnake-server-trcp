@@ -31,7 +31,7 @@ jobs:
       - name: Install dependencies
         run: npm install
       - name: Connect to PostgreSQL
-        run: npm run test
+        run: npm run test2
         env:
           POSTGRES_HOST: postgres
           POSTGRES_PORT: 5432
