@@ -6,7 +6,7 @@
   "scripts": {
     "pretest": "npm run prisma:migrate",
     "test2":"mocha -r ts-node/register test/*.ts --timeout 10000",
-    "test": "nodemon -L test -e ts,js --exec mocha",
+    "test": "mocha -L test -e ts,js --exec ",
     "predev": "npm run prisma:migrate",
     "dev": "concurrently -k -r  \"npm:prisma:studio\" \"npm:server\"",
     "prisma:migrate": "npx prisma migrate dev --name init",
