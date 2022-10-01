@@ -6,32 +6,32 @@ on:
       - main
 
 jobs:
-  init_server:
-    runs-on: ubuntu-18.04
-
-    container: node:16
-
+  # Label of the container job
+  container-job:
+    # Containers must run in Linux based operating systems
+    runs-on: ubuntu-latest
+    container: node:10.18-jessie
     services:
+      # Label used to access the service container
       postgres:
+        # Docker Hub image
         image: postgres
         env:
-          POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
-          POSTGRES_DB: snake
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
+
     steps:
-      - run: |
-          echo "initializing  bitsnake server"
-      - uses: actions/checkout@v3
-      - name: Install Dependency
+      # Downloads a copy of the code in your repository before running CI tests
+      - name: Check out repository code
+        uses: actions/checkout@v3
+      - name: Install dependencies
         run: npm ci
-      - name: Test
+      - name: Connect to PostgreSQL
         run: npm run test2
         env:
           POSTGRES_HOST: postgres
           POSTGRES_PORT: 5432
-  
