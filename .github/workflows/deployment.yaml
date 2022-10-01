@@ -8,15 +8,30 @@ on:
 jobs:
   init_server:
     runs-on: ubuntu-18.04
+
+    container: node:16
+
+    services:
+      postgres:
+        image: postgres
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: snake
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
     steps:
       - run: |
           echo "initializing  bitsnake server"
       - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 16
       - name: Install Dependency
-        run: npm install
+        run: npm ci
       - name: Test
         run: npm run test2
+        env:
+          POSTGRES_HOST: postgres
+          POSTGRES_PORT: 5432
   
